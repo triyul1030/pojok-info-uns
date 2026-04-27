@@ -74,11 +74,15 @@
 	                User
                 @endif
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                 <a href="{{ route('users.edit', ['user' => $user->id ]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
+              <form action="{{ route('users.destroy', ['user' => $user->id ]) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+              </form>              
               </td>
             </tr>
             @endforeach
